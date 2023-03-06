@@ -5,9 +5,10 @@ import Footer from './components/Footer';
 import React from 'react';
 
 export default function App() {
-    const [quantidadeRespostas, SetQuantidade] = React.useState(0);
+    const [quantidadeRespostas, setQuantidade] = React.useState(0);
 
     function addQuantidade(){
+        setQuantidade(quantidadeRespostas+1);
     }
 
     return (
