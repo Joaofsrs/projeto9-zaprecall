@@ -12,6 +12,7 @@ export default function Card(props) {
     const [imgResultado, setImg] = React.useState(seta_play);
     const [cor, setCor] = React.useState("#000000");
     const [linhaText, setTextLine] = React.useState(false);
+    const [dataIcon, setData] = React.useState("play-btn");
 
     function viraDefault(){
         setCard("question");
@@ -27,16 +28,19 @@ export default function Card(props) {
             setCor("#FF3030");
             setTextLine(true);
             setCard("default");
+            setData("no-icon");
         }else if(conteudo === "quase"){
             setImg(icone_quase);
             setCor("#FF922E");
             setTextLine(true);
             setCard("default");
+            setData("partial-icon");
         }else if(conteudo === "zap"){
             setImg(icone_certo);
             setCor("#2FBE34");
             setTextLine(true);
             setCard("default");
+            setData("zap-icon");
         }
     }
 
@@ -48,25 +52,25 @@ export default function Card(props) {
     if(tipoCard === "default"){
         return (
             <CardFechadoStyled cor={cor} linhaText={linhaText} >
-                <h2> Pergunta {props.index+1} </h2>
-                <button onClick={viraDefault} disabled={linhaText} > <img src={imgResultado} alt="Botao para abrir pergunta" /> </button>
+                <h2 data-test="flashcard-text" > Pergunta {props.index+1} </h2>
+                <button data-test={dataIcon} onClick={viraDefault} disabled={linhaText} > <img src={imgResultado} alt="Botao para abrir pergunta" /> </button>
             </CardFechadoStyled>
         );
     }else if(tipoCard === "question"){
         return (
             <CardPerguntaStyled>
-                <h2> {props.question} </h2>
-                <button onClick={viraQuestion} > <img src={seta_virar} alt="Seta para virar carta" /> </button>
+                <h2 data-test="flashcard-text" > {props.question} </h2>
+                <button data-test="turn-btn" onClick={viraQuestion} > <img src={seta_virar} alt="Seta para virar carta" /> </button>
             </CardPerguntaStyled>
         );
     }else if(tipoCard === "answer"){
         return (
             <CardRespostaStyled>
-                <h2> {props.answer} </h2>
+                <h2 data-test="flashcard-text" > {props.answer} </h2>
                 <div>
-                    <button onClick={() => click("nao")} > Não lembrei </button>
-                    <button onClick={() => click("quase")} > Quase não lembrei </button>
-                    <button onClick={() => click("zap")} > Zap! </button>
+                    <button data-test="no-btn" onClick={() => click("nao")} > Não lembrei </button>
+                    <button data-test="partial-btn" onClick={() => click("quase")} > Quase não lembrei </button>
+                    <button data-test="zap-btn" onClick={() => click("zap")} > Zap! </button>
                 </div>
             </CardRespostaStyled>
         );

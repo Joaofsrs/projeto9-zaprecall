@@ -21,8 +21,8 @@ export default function App() {
         return (
             <ContainerApp>
                 <Header/>
-                <ListaCards addQuantidade={addQuantidade} />
-                <Footer quantidadeRespostas={quantidadeRespostas} />
+                <ListaCards data-test="flashcard" addQuantidade={addQuantidade} />
+                <Footer data-test="footer" quantidadeRespostas={quantidadeRespostas} />
             </ContainerApp>
         );
     }
