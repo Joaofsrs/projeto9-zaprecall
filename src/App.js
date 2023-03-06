@@ -40,7 +40,7 @@ export default function App() {
             <ContainerApp>
                 <Header/>
                 <ListaCards addQuantidade={addQuantidade} />
-                <Footer data-test="footer" quantidadeRespostas={quantidadeRespostas} listaResposta={listaResposta} />
+                <Footer quantidadeRespostas={quantidadeRespostas} listaResposta={listaResposta} />
             </ContainerApp>
         );
     }

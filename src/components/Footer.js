@@ -5,7 +5,7 @@ import cards from '../Mock.js'
 export default function Footer(props){
     const numeroPerguntas = cards.length;
     return (
-        <ContainerFooter>
+        <ContainerFooter data-test="footer" >
             <p> {props.quantidadeRespostas}/{numeroPerguntas} CONCLUÍDOS </p>
             <div>
                 {props.listaResposta.map((icon, i) => <img key={i} data-test={icon.test} src={icon.icone} alt={icon.test} />)}
