@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 import { css } from 'styled-components';
+import cards from '../Mock.js'
 
-export default function Footer(){
+export default function Footer(props){
+    const numeroPerguntas = cards.length;
     return (
         <ContainerFooter>
-            <p> 0/4 CONCLUÍDOS </p>
+            <p> {props.quantidadeRespostas}/{numeroPerguntas} CONCLUÍDOS </p>
         </ContainerFooter>
     );    
 }

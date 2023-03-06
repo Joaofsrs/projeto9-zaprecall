@@ -2,13 +2,19 @@ import styled from 'styled-components';
 import Header from "./components/Header";
 import ListaCards from "./components/ListaCards";
 import Footer from './components/Footer';
+import React from 'react';
 
 export default function App() {
+    const [quantidadeRespostas, SetQuantidade] = React.useState(0);
+
+    function addQuantidade(){
+    }
+
     return (
         <ContainerAdd>
             <Header></Header>
-            <ListaCards></ListaCards>
-            <Footer></Footer>
+            <ListaCards addQuantidade={addQuantidade}></ListaCards>
+            <Footer quantidadeRespostas={quantidadeRespostas} ></Footer>
         </ContainerAdd>
     );
 }

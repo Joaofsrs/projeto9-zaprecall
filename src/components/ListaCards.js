@@ -1,14 +1,11 @@
 import styled from 'styled-components';
 import Card from "./Card";
+import cards from "../Mock"
 
-export default function ListaCards(){
+export default function ListaCards(props){
     return (
         <ContainerLista>
-            <Card></Card>
-            <Card></Card>
-            <Card></Card>
-            <Card></Card>
-            <Card></Card>
+            {cards.map((prop, i) => <Card key={prop.question} question={prop.question} answer={prop.answer} index={i} addQuantidade={props.addQuantidade}/> )}
         </ContainerLista>
     );    
 }

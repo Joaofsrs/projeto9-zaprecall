@@ -1,42 +1,115 @@
+import React from 'react';
 import styled from 'styled-components';
 import { css } from 'styled-components';
-import seta_play from '../assets/seta_play.png';
 import seta_virar from '../assets/seta_virar.png';
+import seta_play from '../assets/seta_play.png';
+import icone_certo from '../assets/icone_certo.png';
+import icone_quase from '../assets/icone_quase.png';
+import icone_erro from '../assets/icone_erro.png';
 
-export default function Card() {
-    return (
-        <CardFechado>
-            <h2> Pergunta 1 </h2>
-            <button> <img src={seta_play} alt="Botao para abrir pergunta" /> </button>
-        </CardFechado>
-    );
+export default function Card(props) {
+    const [tipoCard, setCard] = React.useState("default");
+    const [imgResultado, setImg] = React.useState(seta_play);
+    const [cor, setCor] = React.useState("#000000");
+    const [linhaText, setTextLine] = React.useState(false);
 
-    /*
-    return (
-        <CardPergunta>
-            <h2> O que é JSX? </h2>
-            <button> <img src={seta_virar} alt="Seta para virar carta" /> </button>
-        </CardPergunta>
-    );*/
-        
-    /*
-    return (
-        <CardResposta>
-            <h2> JSX é uma sintaxe para escrever HTML dentro do JS </h2>
-            <div>
-                <button> Não lembrei </button>
-                <button> Quase não lembrei </button>
-                <button> Zap! </button>
-            </div>
-        </CardResposta>
-    );*/
+    function viraDefault(){
+        setCard("question");
+    }
+
+    function viraQuestion(){
+        setCard("answer");
+    }
+
+    function viraAnswer(conteudo){
+        if(conteudo === "nao"){
+            setImg(icone_erro);
+            setCor("#FF3030");
+            setTextLine(true);
+            setCard("default");
+        }else if(conteudo === "quase"){
+            setImg(icone_quase);
+            setCor("#FF922E");
+            setTextLine(true);
+            setCard("default");
+        }else if(conteudo === "zap"){
+            setImg(icone_certo);
+            setCor("#2FBE34");
+            setTextLine(true);
+            setCard("default");
+        }
+    }
+
+    function click(conteudo){
+        viraAnswer(conteudo);
+        props.addQuantidade();
+    }
+
+    if(tipoCard === "default"){
+        return (
+            <CardFechadoStyled cor={cor} linhaText={linhaText} >
+                <h2> Pergunta {props.index+1} </h2>
+                <button onClick={viraDefault} disabled={linhaText} > <img src={imgResultado} alt="Botao para abrir pergunta" /> </button>
+            </CardFechadoStyled>
+        );
+    }else if(tipoCard === "question"){
+        return (
+            <CardPerguntaStyled>
+                <h2> {props.question} </h2>
+                <button onClick={viraQuestion} > <img src={seta_virar} alt="Seta para virar carta" /> </button>
+            </CardPerguntaStyled>
+        );
+    }else if(tipoCard === "answer"){
+        return (
+            <CardRespostaStyled>
+                <h2> {props.answer} </h2>
+                <div>
+                    <button onClick={() => click("nao")} > Não lembrei </button>
+                    <button onClick={() => click("quase")} > Quase não lembrei </button>
+                    <button onClick={() => click("zap")} > Zap! </button>
+                </div>
+            </CardRespostaStyled>
+        );
+    }else if(tipoCard === "finish"){
+
+    }
 }
+
 
 const RecursiveFont = css`
     @import url('https://fonts.googleapis.com/css2?family=Recursive:wght@300;400;500;600;700;800;900;1000&display=swap');
 `;
 
-const CardPergunta = styled.li`
+const CardFechadoStyled = styled.li`
+    ${RecursiveFont};
+    display: flex;
+    height: 65px;
+    width: 300px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 4px 5px 0px #00000026;
+    margin-bottom: 25px;
+    text-decoration-line: ${props => props.linhaText ? "line-through" : "none"};
+    color: ${props => props.cor};
+
+    button{
+        background: none;
+        border: none;
+        margin-right: 15px;
+    }
+
+    h2{
+        font-family: 'Recursive', sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        margin-left: 15px;
+    }
+
+`;
+
+const CardPerguntaStyled = styled.li`
     ${RecursiveFont};
     min-height: 131px;
     width: 299px;
@@ -62,7 +135,7 @@ const CardPergunta = styled.li`
     }
 `;
 
-const CardResposta = styled.li`
+const CardRespostaStyled = styled.li`
     ${RecursiveFont};
     width: 299px;
     border-radius: 5px;
@@ -110,31 +183,4 @@ const CardResposta = styled.li`
         font-weight: 400;
         padding: 15px;
     }
-`;
-
-const CardFechado = styled.li`
-    ${RecursiveFont};
-    display: flex;
-    height: 65px;
-    width: 300px;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 5px;
-    background-color: #FFFFFF;
-    box-shadow: 0px 4px 5px 0px #00000026;
-    margin-bottom: 25px;
-
-    button{
-        background: none;
-        border: none;
-        margin-right: 15px;
-    }
-
-    h2{
-        font-family: 'Recursive', sans-serif;
-        font-size: 16px;
-        font-weight: 700;
-        margin-left: 15px;
-    }
-
 `;
