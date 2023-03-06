@@ -51,21 +51,21 @@ export default function Card(props) {
 
     if(tipoCard === "default"){
         return (
-            <CardFechadoStyled cor={cor} linhaText={linhaText} >
+            <CardFechadoStyled data-test="flashcard" cor={cor} linhaText={linhaText} >
                 <h2 data-test="flashcard-text" > Pergunta {props.index+1} </h2>
                 <button data-test={dataIcon} onClick={viraDefault} disabled={linhaText} > <img src={imgResultado} alt="Botao para abrir pergunta" /> </button>
             </CardFechadoStyled>
         );
     }else if(tipoCard === "question"){
         return (
-            <CardPerguntaStyled>
+            <CardPerguntaStyled data-test="flashcard" >
                 <h2 data-test="flashcard-text" > {props.question} </h2>
                 <button data-test="turn-btn" onClick={viraQuestion} > <img src={seta_virar} alt="Seta para virar carta" /> </button>
             </CardPerguntaStyled>
         );
     }else if(tipoCard === "answer"){
         return (
-            <CardRespostaStyled>
+            <CardRespostaStyled data-test="flashcard" >
                 <h2 data-test="flashcard-text" > {props.answer} </h2>
                 <div>
                     <button data-test="no-btn" onClick={() => click("nao")} > Não lembrei </button>

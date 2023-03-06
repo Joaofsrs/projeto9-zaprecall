@@ -4,7 +4,7 @@ import cards from "../Mock"
 
 export default function ListaCards(props){
     return (
-        <ContainerLista data-test="flashcard">
+        <ContainerLista>
             {cards.map((prop, i) => <Card key={prop.question} question={prop.question} answer={prop.answer} index={i} addQuantidade={props.addQuantidade}/> )}
         </ContainerLista>
     );    
