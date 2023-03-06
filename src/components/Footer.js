@@ -7,6 +7,9 @@ export default function Footer(props){
     return (
         <ContainerFooter>
             <p> {props.quantidadeRespostas}/{numeroPerguntas} CONCLUÍDOS </p>
+            <div>
+                {props.listaResposta.map((icon, i) => <img key={i} data-test={icon.test} src={icon.icone} alt={icon.test} />)}
+            </div>
         </ContainerFooter>
     );    
 }
@@ -26,5 +29,6 @@ const ContainerFooter = styled.footer`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 `;
 

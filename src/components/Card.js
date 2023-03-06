@@ -46,7 +46,7 @@ export default function Card(props) {
 
     function click(conteudo){
         viraAnswer(conteudo);
-        props.addQuantidade();
+        props.addQuantidade(conteudo);
     }
 
     if(tipoCard === "default"){
